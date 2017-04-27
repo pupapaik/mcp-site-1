@@ -1,0 +1,36 @@
+classes:
+- system.linux.system.repo.mcp.salt
+- system.linux.system.repo.ubuntu
+- system.openssh.client.lab
+- system.salt.master.pkg
+- system.salt.minion.ca.salt_master
+- system.salt.master.api
+- system.reclass.storage.salt
+- system.reclass.storage.system.physical_control_cluster
+- cluster.mcp-site-1.infra
+parameters:
+  _param:
+    salt_master_base_environment: prd
+    reclass_data_repository: "https://github.com/Mirantis/mk-lab-salt-model.git"
+    reclass_data_revision: master
+    reclass_config_master: ${_param:infra_config_deploy_address}
+    single_address: ${_param:infra_config_address}
+    deploy_address: ${_param:infra_config_deploy_address}
+    linux_system_codename: xenial
+    salt_api_password_hash: "$6$qREaqPqH$p3dZU/gUGrzizN8321k8wjU4rgu3kgGGkU.C0jfIDGyUdaW1gunsWUNhQ.oIPeZaVW6JOrro/Nhayk1g7zBrx0"
+    salt_master_host: ${_param:infra_config_address}
+  reclass:
+    storage:
+      node:
+        infra_kvm_node01:
+          params:
+            keepalived_vip_priority: 100
+            linux_system_codename: xenial
+        infra_kvm_node02:
+          params:
+            keepalived_vip_priority: 101
+            linux_system_codename: xenial
+        infra_kvm_node03:
+          params:
+            keepalived_vip_priority: 102
+            linux_system_codename: xenial
